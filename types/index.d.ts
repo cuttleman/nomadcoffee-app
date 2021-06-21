@@ -1,4 +1,5 @@
 declare module "types" {
+  import { Shop } from "typeApi";
   import { GestureResponderEvent } from "react-native";
   import { Control, FieldValues } from "react-hook-form";
   namespace GlobalVar {}
@@ -8,6 +9,9 @@ declare module "types" {
     }
   }
   namespace Cpts {
+    interface CoffeeShopProps extends Shop {
+      isCurrent: boolean;
+    }
     interface AuthInputProps {
       control: Control<FieldValues>;
       name: string;

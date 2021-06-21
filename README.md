@@ -27,3 +27,22 @@ Task
 ▫ When the user goes to profile the user should see a login form.✅
 ▫ After the user logs in, show the profile of the user.✅
 ```
+
+<br>
+
+## _Week 12_
+
+```
+Task
+
+Today we are gonna make the Home tab.
+
+The Home tab should show all the coffee shops in your Database.
+
+The features you have to implement are:
+
+▫ Infinite Scroll ✅
+▫ Pull to Refresh ✅
+▫ The Coffee Shop component should display the name, photos and categories. ✅
+(will add to current item >> animation) 🤔
+```

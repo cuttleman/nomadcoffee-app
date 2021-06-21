@@ -67,3 +67,29 @@ export const CREATE_ACCOUNT = gql`
     }
   }
 `;
+
+export const SEE_COFFEE_SHOPS = gql`
+  query seeCoffeeShops($pageNum: Int!) {
+    seeCoffeeShops(pageNum: $pageNum) {
+      result
+      error
+      totalPage
+      shops {
+        id
+        name
+        user {
+          id
+          username
+        }
+        photos {
+          id
+          url
+        }
+        categories {
+          id
+          slug
+        }
+      }
+    }
+  }
+`;
