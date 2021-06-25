@@ -19,8 +19,9 @@ import { darkTheme, lightTheme } from "./theme";
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [clientS, setClientS] =
-    useState<undefined | ApolloClient<NormalizedCacheObject>>(undefined);
+  const [clientS, setClientS] = useState<
+    undefined | ApolloClient<NormalizedCacheObject>
+  >(undefined);
   const colorScheme = useColorScheme();
 
   const onFinish = () => {

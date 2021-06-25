@@ -15,7 +15,7 @@ export const isDarkModeVar = makeVar(false);
 export const cache = new InMemoryCache();
 
 const uploadLink = createUploadLink({
-  uri: "http://172.30.1.9:4000/graphql",
+  uri: "http://172.30.1.53:4000/graphql",
 });
 
 const authLink: ApolloLink = setContext(async () => {

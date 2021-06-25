@@ -93,3 +93,20 @@ export const SEE_COFFEE_SHOPS = gql`
     }
   }
 `;
+
+export const SEARCH_COFFEE_SHOP = gql`
+  query searchCoffeeShop($keyword: String!) {
+    searchCoffeeShop(keyword: $keyword) {
+      result
+      error
+      shops {
+        id
+        name
+        photos {
+          id
+          url
+        }
+      }
+    }
+  }
+`;

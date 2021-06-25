@@ -69,7 +69,7 @@ const CoffeeShop: React.FC<Cpts.CoffeeShopProps> = ({
         {categories.length > 0 && (
           <CategoriesBox>
             {categories.map((category) => (
-              <Category key={category.id}>{category.slug}</Category>
+              <Category key={category.id}>#{category.slug}</Category>
             ))}
           </CategoriesBox>
         )}
