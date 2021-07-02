@@ -1,9 +1,10 @@
 declare module "types" {
   import React from "react";
-  import { ParamListBase } from "@react-navigation/native";
+  import { ParamListBase, RouteProp } from "@react-navigation/native";
   import { Shop } from "typeApi";
   import { GestureResponderEvent } from "react-native";
   import { Control, FieldValues } from "react-hook-form";
+  import * as MediaLibrary from "expo-media-library";
   namespace GlobalVar {}
   namespace NavProps {
     interface StackParamList extends ParamListBase {
@@ -38,5 +39,21 @@ declare module "types" {
       hasError: boolean;
       onPress: (event: GestureResponderEvent) => void;
     }
+    interface PhotoProps {
+      uri: string;
+      isSelected: boolean;
+      index: number;
+      selectedIndex: number;
+      isSingleMode: boolean;
+      longPressHandler: (photoId: number) => void;
+      shortPressHandler: (photoId: number) => void;
+    }
+  }
+
+  namespace ParamList {
+    type UploadForm = RouteProp<
+      { UploadForm: { photos: MediaLibrary.Asset[] } },
+      "UploadForm"
+    >;
   }
 }

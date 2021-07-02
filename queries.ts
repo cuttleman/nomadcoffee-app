@@ -73,7 +73,7 @@ export const SEE_COFFEE_SHOPS = gql`
     seeCoffeeShops(pageNum: $pageNum) {
       result
       error
-      totalPage
+      hasNext
       shops {
         id
         name

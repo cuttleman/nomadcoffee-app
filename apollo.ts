@@ -8,14 +8,27 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createUploadLink } from "apollo-upload-client";
+import { serverUrl } from "./utils";
 
 export const isLoggedInVar = makeVar(false);
 export const isDarkModeVar = makeVar(false);
 
-export const cache = new InMemoryCache();
+export const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        seeCoffeeShops: {
+          merge: (_, incoming: any[]) => {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
 
 const uploadLink = createUploadLink({
-  uri: "http://172.30.1.53:4000/graphql",
+  uri: serverUrl("dev"),
 });
 
 const authLink: ApolloLink = setContext(async () => {

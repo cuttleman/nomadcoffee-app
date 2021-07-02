@@ -3,6 +3,7 @@ import { Text } from "react-native";
 import styled from "styled-components/native";
 import { Cpts } from "types";
 import constants from "../constants";
+import { serverUrl } from "../utils";
 
 const Container = styled.TouchableOpacity<{ isCurrent: boolean }>`
   width: ${constants.width}px;
@@ -61,7 +62,12 @@ const CoffeeShop: React.FC<Cpts.CoffeeShopProps> = ({
   return (
     <Container isCurrent={isCurrent}>
       <MainImg
-        source={{ uri: photos[0].url.replace("localhost", "172.30.1.9") }}
+        source={{
+          uri: photos[0].url.replace(
+            "http://localhost:4000/",
+            serverUrl("dev").split("graphql")[0]
+          ),
+        }}
         resizeMode="cover"
       />
       <ContentBox>

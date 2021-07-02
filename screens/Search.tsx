@@ -15,6 +15,7 @@ import HideKeyboard from "../components/HideKeyboard";
 import MessageContent from "../components/MessageContent";
 import constants from "../constants";
 import { SEARCH_COFFEE_SHOP } from "../queries";
+import { serverUrl } from "../utils";
 
 const Search = ({ navigation }: Scrns.Search) => {
   const { control, getValues, handleSubmit } = useForm<{ keyword: string }>();
@@ -29,10 +30,12 @@ const Search = ({ navigation }: Scrns.Search) => {
     startQueryFuc({ variables: { keyword } });
   };
 
-  const onRefresh = () => {
+  const onRefresh = async () => {
     try {
-      setRefreshing(true);
-      refetch();
+      if (refetch) {
+        setRefreshing(true);
+        refetch();
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -45,7 +48,10 @@ const Search = ({ navigation }: Scrns.Search) => {
       <TouchableOpacity>
         <Image
           source={{
-            uri: item.photos[0].url.replace("localhost", "172.30.1.9"),
+            uri: item.photos[0].url.replace(
+              "http://localhost:4000/",
+              serverUrl("dev").split("graphql")[0]
+            ),
           }}
           style={{
             width: constants.width / NUM_COLUMNS,

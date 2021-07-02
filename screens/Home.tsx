@@ -13,7 +13,6 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [shops, setShops] = useState<Shop[]>([]);
   const [current, setCurrent] = useState<number>(0);
-  const [hasNext, setHasNext] = useState<boolean>(true);
   const { data, loading, refetch } = useQuery<{
     seeCoffeeShops: SeeCoffeeShops;
   }>(SEE_COFFEE_SHOPS, {
@@ -62,6 +61,7 @@ const Home = () => {
   };
 
   const onReachedBottom = () => {
+    const hasNext = data?.seeCoffeeShops.hasNext;
     if (hasNext) {
       setPageNum((prev) => prev + 1);
     } else {
@@ -72,12 +72,8 @@ const Home = () => {
   useEffect(() => {
     if (data?.seeCoffeeShops.result) {
       const fetchedShops = data?.seeCoffeeShops.shops;
-      const fetchedTotalPage = data.seeCoffeeShops.totalPage;
       if (fetchedShops) {
         setShops((prev) => prev.concat(fetchedShops));
-      }
-      if (fetchedTotalPage && pageNum >= fetchedTotalPage) {
-        setHasNext(false);
       }
     }
   }, [data]);
