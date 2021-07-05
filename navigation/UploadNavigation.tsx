@@ -36,10 +36,13 @@ const UploadNavigation = () => {
         {() => (
           <Stack.Navigator
             screenOptions={{
+              headerTitle: "",
               headerBackImage: () => <Ionicons name="close" size={30} />,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
           >
             <Stack.Screen name="take" component={Take} />
+            <Stack.Screen name="uploadForm" component={UploadForm} />
           </Stack.Navigator>
         )}
       </MaterialTab.Screen>

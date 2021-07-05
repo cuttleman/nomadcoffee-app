@@ -1,9 +1,9 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Scrns } from "types";
+import { FormValues, Scrns } from "types";
 import AuthBtn from "../../components/AuthBtn";
-import AuthInput from "../../components/AuthInput";
+import InputControl from "../../components/InputControl";
 import { CREATE_ACCOUNT } from "../../queries";
 import { ErrorMsg, Form } from "./LogIn";
 
@@ -14,7 +14,7 @@ const SignUp: React.FC<Scrns.Auth> = ({ togglePage }) => {
     getValues,
     setError,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+  } = useForm<FormValues.SignUp>({ mode: "onChange" });
 
   const onCompleted = (data: any) => {
     const {
@@ -42,31 +42,63 @@ const SignUp: React.FC<Scrns.Auth> = ({ togglePage }) => {
   };
   return (
     <Form>
-      <AuthInput control={control} name="email" />
+      <InputControl
+        control={control}
+        name="email"
+        rules={{
+          required: true,
+          pattern: {
+            value:
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: "please input as email type",
+          },
+        }}
+      />
       {errors.email ? (
         <ErrorMsg>{errors.email?.message}</ErrorMsg>
       ) : (
         <ErrorMsg>{""}</ErrorMsg>
       )}
-      <AuthInput control={control} name="password" />
+      <InputControl
+        control={control}
+        name="password"
+        rules={{
+          required: true,
+          pattern: {
+            value: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+            message: "required that is included 0-9, a-z, !@#$%^&*",
+          },
+        }}
+      />
       {errors.password ? (
         <ErrorMsg>{errors.password?.message}</ErrorMsg>
       ) : (
         <ErrorMsg>{""}</ErrorMsg>
       )}
-      <AuthInput control={control} name="username" />
+      <InputControl
+        control={control}
+        name="username"
+        rules={{
+          required: true,
+          pattern: {
+            value:
+              /^([^\s!?@#$%^&*._\-~,;:"'+=()<>[\]ㄱ-ㅎ가-힣]|([a-zA-Z0-9][._]+))*[^\s!?@#$%^&*._\-~,;:"'+=()<>[\]ㄱ-ㅎ가-힣]$/,
+            message: "only alphabet and can include . _ middle of characters",
+          },
+        }}
+      />
       {errors.username ? (
         <ErrorMsg>{errors.username?.message}</ErrorMsg>
       ) : (
         <ErrorMsg>{""}</ErrorMsg>
       )}
-      <AuthInput control={control} name="name" />
+      <InputControl control={control} name="name" />
       {errors.name ? (
         <ErrorMsg>{errors.name?.message}</ErrorMsg>
       ) : (
         <ErrorMsg>{""}</ErrorMsg>
       )}
-      <AuthInput control={control} name="location" />
+      <InputControl control={control} name="location" />
       {errors.location ? (
         <ErrorMsg>{errors.location?.message}</ErrorMsg>
       ) : (

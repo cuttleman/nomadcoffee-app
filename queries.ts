@@ -110,3 +110,24 @@ export const SEARCH_COFFEE_SHOP = gql`
     }
   }
 `;
+
+export const CREATE_COFFEE_SHOP = gql`
+  mutation createCoffeeShop(
+    $name: String!
+    $latitude: String
+    $longitude: String
+    $categories: [String]
+    $photos: [Upload]
+  ) {
+    createCoffeeShop(
+      name: $name
+      latitude: $latitude
+      longitude: $longitude
+      categories: $categories
+      photos: $photos
+    ) {
+      result
+      error
+    }
+  }
+`;

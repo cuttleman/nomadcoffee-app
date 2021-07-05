@@ -5,19 +5,16 @@ import { Cpts } from "types";
 import constants from "../constants";
 import { serverUrl } from "../utils";
 
-const Container = styled.TouchableOpacity<{ isCurrent: boolean }>`
+const Container = styled.TouchableOpacity`
   width: ${constants.width}px;
   align-items: center;
-  transform: ${(props) => (props.isCurrent ? "scale(1.2)" : "scale(1)")};
+  margin-bottom: 30px;
 `;
 
 const MainImg = styled.Image`
-  transform: translateY(30px);
-  width: ${constants.width / 2}px;
-  height: ${constants.width / 2}px;
-  border-radius: 10px;
-  background-color: black;
-  z-index: 3;
+  width: 100%;
+  height: 500px;
+  resize-mode: contain;
 `;
 
 const ContentBox = styled.View`
@@ -57,10 +54,9 @@ const CoffeeShop: React.FC<Cpts.CoffeeShopProps> = ({
   user,
   photos,
   categories,
-  isCurrent,
 }) => {
   return (
-    <Container isCurrent={isCurrent}>
+    <Container>
       <MainImg
         source={{
           uri: photos[0].url.replace(
@@ -68,7 +64,12 @@ const CoffeeShop: React.FC<Cpts.CoffeeShopProps> = ({
             serverUrl("dev").split("graphql")[0]
           ),
         }}
-        resizeMode="cover"
+        // style={{
+        //   resizeMode: "contain",
+        //   width: "100%",
+        //   height: undefined,
+        //   aspectRatio: 1,
+        // }}
       />
       <ContentBox>
         <Title>{name}</Title>

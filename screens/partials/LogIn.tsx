@@ -2,10 +2,10 @@ import React from "react";
 import { useMutation } from "@apollo/client";
 import styled from "styled-components/native";
 import { useForm } from "react-hook-form";
-import { Scrns } from "types";
+import { FormValues, Scrns } from "types";
 import { login } from "../../apollo";
 import AuthBtn from "../../components/AuthBtn";
-import AuthInput from "../../components/AuthInput";
+import InputControl from "../../components/InputControl";
 import { LOG_IN } from "../../queries";
 import constants from "../../constants";
 
@@ -26,7 +26,7 @@ const LogIn: React.FC<Scrns.Auth> = ({ togglePage }) => {
     getValues,
     setError,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+  } = useForm<FormValues.LogIn>({ mode: "onChange" });
 
   const onCompleted = (data: any) => {
     const {
@@ -51,13 +51,34 @@ const LogIn: React.FC<Scrns.Auth> = ({ togglePage }) => {
   };
   return (
     <Form>
-      <AuthInput control={control} name="email" />
+      <InputControl
+        control={control}
+        name="email"
+        rules={{
+          required: true,
+          pattern: {
+            value:
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: "please input as email type",
+          },
+        }}
+      />
       {errors.email ? (
         <ErrorMsg>{errors.email?.message}</ErrorMsg>
       ) : (
         <ErrorMsg>{""}</ErrorMsg>
       )}
-      <AuthInput control={control} name="password" />
+      <InputControl
+        control={control}
+        name="password"
+        rules={{
+          required: true,
+          pattern: {
+            value: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+            message: "required that is included 0-9, a-z, !@#$%^&*",
+          },
+        }}
+      />
       {errors.password ? (
         <ErrorMsg>{errors.password?.message}</ErrorMsg>
       ) : (

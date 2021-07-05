@@ -35,12 +35,12 @@ const SelectModeIndicator = styled.View`
   elevation: 6;
 `;
 
-const NextBtn = styled.TouchableOpacity`
+export const NextBtn = styled.TouchableOpacity`
   margin-right: 15px;
   padding: 5px;
 `;
 
-const NextTxt = styled.Text`
+export const NextTxt = styled.Text`
   color: #00a8ff;
   font-weight: 700;
   font-size: 16px;
@@ -98,7 +98,8 @@ const Select: React.FC = () => {
 
   const getPhotos = async () => {
     if (isGranted) {
-      const { assets } = await MediaLibrary.getAssetsAsync();
+      const { assets } = await MediaLibrary.getAssetsAsync({ first: 20 });
+      // console.log(assets.length);
       setPhotos(assets);
       setSelectedPhotos([assets[0]]);
     }

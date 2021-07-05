@@ -13,19 +13,7 @@ import { serverUrl } from "./utils";
 export const isLoggedInVar = makeVar(false);
 export const isDarkModeVar = makeVar(false);
 
-export const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        seeCoffeeShops: {
-          merge: (_, incoming: any[]) => {
-            return incoming;
-          },
-        },
-      },
-    },
-  },
-});
+export const cache = new InMemoryCache();
 
 const uploadLink = createUploadLink({
   uri: serverUrl("dev"),

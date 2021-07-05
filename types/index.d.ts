@@ -26,18 +26,33 @@ declare module "types" {
       text: string;
       children?: React.ReactNode;
     }
-    interface CoffeeShopProps extends Shop {
-      isCurrent: boolean;
-    }
-    interface AuthInputProps {
-      control: Control<FieldValues>;
-      name: string;
-      defaultValue?: string;
-    }
+    interface CoffeeShopProps extends Shop {}
     interface AuthBtnProps {
       text: string;
       hasError: boolean;
       onPress: (event: GestureResponderEvent) => void;
+    }
+    interface InputControlProps {
+      control: Control<
+        FieldValues<FormValues.Upload | FormValues.LogIn | FormValues.SignUp>
+      >;
+      name: string;
+      defaultValue?: string;
+      rules?: {
+        required?: boolean;
+        maxLength?: {
+          value: number;
+          message: string;
+        };
+        minLength?: {
+          value: number;
+          message: string;
+        };
+        pattern?: {
+          value: RegExp;
+          message: string;
+        };
+      };
     }
     interface PhotoProps {
       uri: string;
@@ -50,10 +65,33 @@ declare module "types" {
     }
   }
 
+  namespace FormValues {
+    interface LogIn {
+      email: string;
+      password: string;
+      result: string;
+    }
+    interface SignUp {
+      email: string;
+      password: string;
+      username: string;
+      name?: string;
+      location?: string;
+      result: string;
+    }
+    interface Upload {
+      name: string;
+      latitude: string;
+      longitude: string;
+      result: string;
+    }
+  }
+
   namespace ParamList {
     type UploadForm = RouteProp<
       { UploadForm: { photos: MediaLibrary.Asset[] } },
       "UploadForm"
     >;
+    type Home = RouteProp<{ Home: { pageNum: number } }, "Home">;
   }
 }

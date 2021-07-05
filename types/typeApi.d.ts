@@ -20,6 +20,6 @@ declare module "typeApi" {
     error?: string;
     totalPage?: number;
     hasNext?: boolean;
-    shops?: Shop[];
+    shops: Shop[];
   }
 }

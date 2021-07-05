@@ -15,8 +15,7 @@ const Navigation: React.FC = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          cardStyleInterpolator:
-            CardStyleInterpolators.forRevealFromBottomAndroid,
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
         }}
         mode="modal"
       >

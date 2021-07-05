@@ -20,8 +20,10 @@ import { serverUrl } from "../utils";
 const Search = ({ navigation }: Scrns.Search) => {
   const { control, getValues, handleSubmit } = useForm<{ keyword: string }>();
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [startQueryFuc, { loading, data, called, refetch }] =
-    useLazyQuery(SEARCH_COFFEE_SHOP);
+  const [startQueryFuc, { loading, data, called, refetch }] = useLazyQuery(
+    SEARCH_COFFEE_SHOP,
+    { fetchPolicy: "no-cache" }
+  );
 
   const NUM_COLUMNS = 3;
 
@@ -74,6 +76,7 @@ const Search = ({ navigation }: Scrns.Search) => {
           onBlur={onBlur}
           onChangeText={onChange}
           placeholder={"title or #category"}
+          defaultValue=""
           value={value}
           onSubmitEditing={handleSubmit(onValid)}
         />

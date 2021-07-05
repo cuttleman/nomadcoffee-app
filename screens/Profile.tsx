@@ -9,6 +9,7 @@ const Profile = () => {
     variables: {
       pageNum: 1,
     },
+    fetchPolicy: "no-cache",
   });
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

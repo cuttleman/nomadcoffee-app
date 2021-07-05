@@ -2,7 +2,10 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    "paths": { "types": ["./types"] },
+    "paths": {
+      "types": ["./types"],
+      "react-native-mime-types": ["./types/react-native-mime-types.d.ts"]
+    },
     "plugins": [
       {
         "name": "typescript-styled-plugin",
@@ -18,7 +21,8 @@
             "margin-horizontal",
             "tint-color",
             "aspect-ratio",
-            "elevation"
+            "elevation",
+            "resize-mode"
           ]
         }
       }
